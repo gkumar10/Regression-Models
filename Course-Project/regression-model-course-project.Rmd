@@ -1,0 +1,67 @@
+---
+output:
+  pdf_document:
+    fig_crop: no
+---
+#Analysis for Motor Trend magazine
+
+##Executive Summary
+
+This paper explores the relationship between a set of variables and miles per gallon (mpg) using mtcars dataset. In particular, the focus is on answering two questions:
+
+1. “Is an automatic or manual transmission better for MPG”
+2. "Quantify the MPG difference between automatic and manual transmissions"
+
+##Data Exploration
+
+###Load Data
+
+```{r echo=TRUE}
+library(datasets)
+data(mtcars)
+```
+
+###Relationship between MPG and Transmission type (single variable analysis)
+
+The boxplot in Figure 1 in Appendix shows that MPG distribution is generally higher in cars with manual transmission as compared to MPG distribution in cars with automatic transmission. Figure 1 answers the first question about what transmission is better for MPG using a single variable relationship. 
+
+However, MPG may also be dependent on any of the other variables like number of cylinders, weight, displacement and horsepower. The correlation coefficients below show that number of cylinders (cyl), displacement (disp), horsepower (hp) and weight (wt) have a strong negative linear relationship with MPG. While rear axle ratio (drat) and transmission (am, vs) have strong to moderate positive linear relationship with MPG.
+
+```{r echo=TRUE}
+cor(mtcars, mtcars$mpg)[-1,]
+```
+
+We will now fit a linear regression model with MPG as outcome and transmission as predictor.
+```{r echo=TRUE}
+fit1 <- lm(mpg ~ am, data=mtcars)
+summary(fit1)$coef
+```
+
+The above coefficient summary show that cars with automatic transmissions achieve `r round(summary(fit1)$coef[1],2)`mpg fuel economy on average and that cars with manual transmission achieve `r round(summary(fit1)$coef[1] + summary(fit1)$coef[2],2)`mpg fuel economy on average.
+
+###Relationship between MPG and other variables (mutlivariate analysis)
+
+Due to the 2-page requirement, we will limit the model to add weight (wt) as a predictor along with transmission. We chose weight because it shows the strongest relationship with the outcome (mpg). We will use anova() function to compare the two models.
+
+```{r echo=TRUE}
+fit2 <- lm(mpg ~ am + wt, data=mtcars)
+anova(fit1, fit2)
+```
+
+
+******
+##Appendix
+
+```{r echo=TRUE}
+library(ggplot2)
+mtcars$trn <- factor(mtcars$am, labels=c("automatic", "manual"))
+ggplot(mtcars, aes(x=trn, y=mpg, fill=trn)) + 
+  geom_boxplot() + 
+  geom_jitter(aes(colour=trn)) +
+  xlab("Transmission") +
+  ylab("Miles Per Gallon (MPG)") + 
+  ggtitle("Figure 1: MPG values by Transmission type") +
+  scale_color_discrete(name="Transmission") +
+  guides(fill=guide_legend(title="Transmission"))
+```
+

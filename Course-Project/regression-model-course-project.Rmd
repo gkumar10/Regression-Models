@@ -12,6 +12,10 @@ This paper explores the relationship between a set of variables and miles per ga
 1. “Is an automatic or manual transmission better for MPG”
 2. "Quantify the MPG difference between automatic and manual transmissions"
 
+Based on correlation analysis and linear regression model, transmission type is found to be a moderate predictor for MPG. Therefore no significant conclusions can be made regarding transmission type's correlation with MPG. 
+
+Other variables in mtcars dataset (like cylinders, weight) may have a stronger correlation with MPG but that requires a more detailed analysis that is outside the scope of this paper.
+
 ##Data Exploration
 
 ###Load Data
@@ -48,10 +52,14 @@ fit2 <- lm(mpg ~ am + wt, data=mtcars)
 anova(fit1, fit2)
 ```
 
+###Residuals
+
+The residual plot in Figure 2 produces no identifying pattern.
 
 ******
 ##Appendix
 
+Figure 1: MPG values by Transmission type
 ```{r echo=TRUE}
 library(ggplot2)
 mtcars$trn <- factor(mtcars$am, labels=c("automatic", "manual"))
@@ -65,3 +73,8 @@ ggplot(mtcars, aes(x=trn, y=mpg, fill=trn)) +
   guides(fill=guide_legend(title="Transmission"))
 ```
 
+Figure 2: Residual plot
+```{r echo=TRUE}
+fit3 <- lm(mtcars$mpg ~ am + wt, data=mtcars)
+plot(resid(fit3) ~ predict(fit3), title="Residual plot")
+```

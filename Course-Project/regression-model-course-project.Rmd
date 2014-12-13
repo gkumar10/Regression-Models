@@ -1,5 +1,6 @@
 ---
 output:
+  html_document: default
   pdf_document:
     fig_crop: no
 ---
@@ -45,16 +46,27 @@ The above coefficient summary show that cars with automatic transmissions achiev
 
 ###Relationship between MPG and other variables (mutlivariate analysis)
 
-Due to the 2-page requirement, we will limit the model to add weight (wt) as a predictor along with transmission. We chose weight because it shows the strongest relationship with the outcome (mpg). We will use anova() function to compare the two models.
+Due to the 2-page requirement, we will limit the model to use weight (wt) and cylinder (cyl) as predictors along with transmission. We chose weight or cylinder because they show the strongest relationship with the outcome (mpg). We will use anova() function to compare the models.
 
 ```{r echo=TRUE}
 fit2 <- lm(mpg ~ am + wt, data=mtcars)
+fit3 <- lm(mpg ~ am + cyl, data=mtcars)
 anova(fit1, fit2)
+anova(fit1, fit3)
 ```
+
+Low p-values in either anova() test indicate tighter fit with cylinders or weight than transmission alone.
 
 ###Residuals
 
-The residual plot in Figure 2 produces no identifying pattern.
+The residual plot in Figure 2 produces no identifying pattern as predictors of MPG.
+
+###Conclusion
+
+To conclude - transmission type is not a strong indicator of MPG. Other variables offre a better fit to predict MPG.
+
+1. “Is an automatic or manual transmission better for MPG” - as Figure 1 shows manual transmission is better for MPG.
+2. "Quantify the MPG difference between automatic and manual transmissions" - as 
 
 ******
 ##Appendix
@@ -75,6 +87,6 @@ ggplot(mtcars, aes(x=trn, y=mpg, fill=trn)) +
 
 Figure 2: Residual plot
 ```{r echo=TRUE}
-fit3 <- lm(mtcars$mpg ~ am + wt, data=mtcars)
-plot(resid(fit3) ~ predict(fit3), title="Residual plot")
+fit4 <- lm(mtcars$mpg ~ am + wt + cyl, data=mtcars)
+plot(resid(fit4) ~ predict(fit4), xlab="Residuals", ylab="Predictors", main="Residual plot")
 ```

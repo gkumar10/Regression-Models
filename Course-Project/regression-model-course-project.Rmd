@@ -59,14 +59,14 @@ Low p-values in either anova() test indicate tighter fit with cylinders or weigh
 
 ###Residuals
 
-The residual plot in Figure 2 produces no identifying pattern as predictors of MPG.
+The residual plot in Figure 2 is produces no definite or identifying pattern as predictors of MPG.
 
 ###Conclusion
 
 To conclude - transmission type is not a strong indicator of MPG. Other variables offre a better fit to predict MPG.
 
-1. “Is an automatic or manual transmission better for MPG” - as Figure 1 shows manual transmission is better for MPG.
-2. "Quantify the MPG difference between automatic and manual transmissions" - as 
+1. “Is an automatic or manual transmission better for MPG” - Figure 1 shows that manual transmission is better for MPG.
+2. "Quantify the MPG difference between automatic and manual transmissions" - above data analysis presents basic quantification of MPG difference based on transmission type. The analysis proves that  above other variables like cylinders, weight and displacement would offer better correlation and causation with MPG.
 
 ******
 ##Appendix
@@ -90,3 +90,6 @@ Figure 2: Residual plot
 fit4 <- lm(mtcars$mpg ~ am + wt + cyl, data=mtcars)
 plot(resid(fit4) ~ predict(fit4), xlab="Residuals", ylab="Predictors", main="Residual plot")
 ```
+
+end of document
+---------------

@@ -61,7 +61,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>“Is an automatic or manual transmission better for MPG”</li>
 <li>“Quantify the MPG difference between automatic and manual transmissions”</li>
 </ol>
-<p>Based on correlation analysis and linear regression model, transmission type is found to be a moderate predictor for MPG. Therefore no significant conclusions can be made regarding transmission type’s correlation with MPG.</p>
+<p>Based on correlation analysis and linear regression model, transmission type is found to be a moderate predictor for MPG. No significant conclusions can be made regarding transmission type’s correlation with MPG.</p>
 <p>Other variables in mtcars dataset (like cylinders, weight) may have a stronger correlation with MPG but that requires a more detailed analysis that is outside the scope of this paper.</p>
 </div>
 <div id="data-exploration" class="section level2">
@@ -86,11 +86,11 @@ summary(fit1)$coef</code></pre>
 <pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
 ## (Intercept) 17.147368   1.124603 15.247492 1.133983e-15
 ## am           7.244939   1.764422  4.106127 2.850207e-04</code></pre>
-<p>The above coefficient summary show that cars with automatic transmissions achieve 17.15mpg fuel economy on average and that cars with manual transmission achieve 24.39mpg fuel economy on average.</p>
+<p>The above coefficient summary show that cars with automatic transmissions get 17.15mpg fuel economy on average and that cars with manual transmission get 17.15 + 7.24 = 24.39mpg fuel economy on average.</p>
 </div>
 <div id="relationship-between-mpg-and-other-variables-mutlivariate-analysis" class="section level3">
 <h3>Relationship between MPG and other variables (mutlivariate analysis)</h3>
-<p>Due to the 2-page requirement, we will limit the model to use weight (wt) and cylinder (cyl) as predictors along with transmission. We chose weight or cylinder because they show the strongest relationship with the outcome (mpg). We will use anova() function to compare the models.</p>
+<p>Due to the 2-page limit requirement, we will limit the model to use weight (wt) and cylinder (cyl) as separate predictors along with transmission. We chose weight or cylinder because they show the strongest relationship with the outcome (mpg). We will use anova() function to compare the models.</p>
 <pre class="r"><code>fit2 &lt;- lm(mpg ~ am + wt, data=mtcars)
 fit3 &lt;- lm(mpg ~ am + cyl, data=mtcars)
 anova(fit1, fit2)</code></pre>
@@ -117,14 +117,14 @@ anova(fit1, fit2)</code></pre>
 </div>
 <div id="residuals" class="section level3">
 <h3>Residuals</h3>
-<p>The residual plot in Figure 2 is produces no definite or identifying pattern as predictors of MPG.</p>
+<p>The residual plot in Figure 2 show no definite or identifying pattern as predictors of MPG.</p>
 </div>
 <div id="conclusion" class="section level3">
 <h3>Conclusion</h3>
 <p>To conclude - transmission type is not a strong indicator of MPG. Other variables offre a better fit to predict MPG.</p>
 <ol style="list-style-type: decimal">
 <li>“Is an automatic or manual transmission better for MPG” - Figure 1 shows that manual transmission is better for MPG.</li>
-<li>“Quantify the MPG difference between automatic and manual transmissions” - above data analysis presents basic quantification of MPG difference based on transmission type. The analysis proves that above other variables like cylinders, weight and displacement would offer better correlation and causation with MPG.</li>
+<li>“Quantify the MPG difference between automatic and manual transmissions” - above data analysis presents basic quantification of MPG difference based on transmission type. The analysis above prove that other variables like cylinders, weight and displacement would offer better correlation and causation with MPG.</li>
 </ol>
 <hr />
 </div>
